@@ -22,8 +22,16 @@ function App() {
       deadline,
     };
 
-    setTasks((prevTasks)=>[...prevTasks, newTask]);
+    setTasks([...tasks, newTask]);
   };
+    const deleteTask = (id: string) =>{
+      setTasks(tasks.filter(task => task.id !== id));
+    };
+    const toggleTask = (id: string)=>{
+      setTasks(tasks.map(t=>
+        t.id===id?{...t, completed: !t.completed}:t
+      ));
+    };
 
   return(
     /**Bootstrap Container*/
@@ -32,7 +40,9 @@ function App() {
 
       <AddTask onAddTask={addTask} />
 
-      <TaskList tasks={tasks} />
+       <TaskList tasks={tasks} 
+       onDeleteTask={deleteTask} 
+       onToggleTask={toggleTask}/>
     </div>
   );
 }

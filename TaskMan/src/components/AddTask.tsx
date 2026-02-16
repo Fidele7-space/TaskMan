@@ -6,27 +6,34 @@ interface Props{
 
 function AddTask({onAddTask}: Props){
 
-    const [inputValue, setInputValue]=useState('');
+    const [title, setTitle]=useState('');
+    const [deadline, setDeadline]= useState("");
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
-        setInputValue(event.target.value);
-
-    };
+   //submission handling
     const submitHandling = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!inputValue.trim()) return; //empty tasks are not allowed
-        onAddTask(inputValue, new Date());
+        if (!title.trim() || !deadline) return; //empty tasks are not allowed
 
-        setInputValue("");
+        onAddTask(title, new Date(deadline));
+
+        //form clearing
+        setTitle("");
+        setDeadline("");
     };
     return(
         <form onSubmit={submitHandling} className="mb-3 d-flex gap-2">
-            <input id="taskTitle" type="text" value={inputValue}
-            onChange={handleChange} className="form-control"
+            <input id="taskTitle" type="text" value={title}
+            onChange={(e)=> setTitle(e.target.value)}
+            className="form-control"
             placeholder='Enter a new task...'/>
+
+            //Deadline selector
+            <input type="date" value={deadline}
+                onChange={(e) => setDeadline(e.target.value)}
+                className='form-control' />
+
             <button type="submit" className="btn btn-primary">Add</button>
         </form>
     );
 }
-
 export default AddTask;
