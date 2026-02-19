@@ -22,29 +22,43 @@ function getStatus(task: Task): 'pending' | 'ongoing' | 'overdue' | 'completed' 
 
 function TaskItem({task, onDelete, onToggle}: Props){
     const status = getStatus(task);
-    const statusClass ={
+    const badgeClass ={
         completed: 'bg-success text-white',
-        pending: 'bg-warning',
-        ongoing: 'bg-info text-white',
+        pending: 'bg-warning text-dark',
+        ongoing: 'bg-info text-dark',
         overdue: 'bg-danger text-white',
-        }[status];
+        }[status] || 'bg-secondary';
 
 return(
-    <div className={`card p-3 shadow-sm ${statusClass}`}>
-        {/*Task Title*/}
-        <h4 className="mb-1">{task.title}</h4>
-        <small className="mb-2">
-            Due: {new Date(task.deadline).toLocaleString()}
-        </small>
-        <div className='d-flex justify-content-between
-        align-items-center mt-2'>
-            <input type="checkbox"
-            checked={task.completed}
-            onChange={()=> onToggle(task.id)} />
+    <div className='card border-0 shadow-sm'>
+        <div className='card-body'>
+            <div className='d-flex justify-content-between -align-items-start mb-1'>
+                <h4 className='card-title mb-0'>{task.title}</h4>
+                <span className={`badge ${badgeClass}`}>{status}</span>
+            </div>
+            <small className='text-muted d-block mb-2'>
+                Due: {new Date(task.deadline).toLocaleDateString()}
+            </small>
+            <div className='d-flex justify-content-between align-items-center'>
+                <div className='form-check-input'>
+                    <input 
+                    type="checkbox" 
+                    className='form-check-input'
+                    checked={task.completed}
+                    onChange={()=> onToggle(task.id)} 
+                    id={`task-${task.id}`}
+                    />
+                <label className='form-check-label small'
+                htmlFor={`task-${task.id}`} >
+                    Mark as completed
+                </label>
+            </div>
+       
+            <button className= "btn btn-sm btn-outline-danger"
+                    onClick={()=> onDelete(task.id)} 
+            >Delete</button>
         </div>
-        <button className= "btn btn-sm btn-dark"
-                onClick={()=> onDelete(task.id)} 
-        >Delete</button>
+    </div>
     </div>
 );
 }

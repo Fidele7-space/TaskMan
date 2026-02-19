@@ -1,42 +1,180 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ========== BASE (MOBILE FIRST) ========== */
+
+* {
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-root {
+  min-height: 100vh;
+  position: relative;
+  background-color: #e5effb;
+  padding: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/*Login Page*/
+.login-root {
+  min-height: 100vh;
+  position: relative;
+  background-color: #e5effb;
+  padding: 1rem;
+}
+
+.login-card {
+  background-color: rgba(255, 255, 255, 0.96);
+  margin: 1rem auto;
+  max-width: 100%;
+}
+
+.login-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+/* soft blurred gradient background */
+.bg-blur-layer {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, #a5b4fc 0, transparent 50%),
+    radial-gradient(circle at bottom right, #7dd3fc 0, transparent 50%);
+  opacity: 0.55;
+  filter: blur(40px);
+  z-index: -1;
+}
+
+/* MOBILE: app-shell stacks vertically */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.96);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin: 1rem auto;
+  max-width: 100%;
+}
+
+/* MOBILE: sidebar is full-width horizontal bar */
+.app-sidebar {
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(180deg, #e5edff, #dbeafe);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: #b2bddc;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-sidebar .list-group-item {
+  background-color: transparent;
+  color: #475569;
+  margin-bottom: 0.5rem;
+  border-radius: 0.75rem;
+}
+
+.app-sidebar .list-group-item.active {
+  background-color: #1d4ed8;
+  color: white;
+  box-shadow: 0 6px 14px rgba(148, 163, 184, 0.4);
+}
+
+/* MOBILE: smaller logo icon */
+.fs-5 {
+  height: 30px;
+  width: 30px;
+}
+
+/* main content */
+.app-main {
+  flex: 1;
+  background-color: #f8fafc;
+  padding: 1.25rem;
+}
+
+/* ========== TABLET (≥768px) ========== */
+@media (min-width: 768px) {
+  .app-root,
+  .login-root {
+    padding: 2rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .app-shell {
+    flex-direction: row; /* sidebar left, main right */
+    max-width: 1000px;
+    margin: 2rem auto;
+  }
+
+  .app-sidebar {
+    width: 230px;
+    border-bottom: none;
+    border-right: 1px solid rgba(148, 163, 184, 0.4);
+    padding: 1.5rem 1.25rem;
+  }
+
+  .app-main {
+    padding: 2rem;
+  }
+
+  .login-card {
+    max-width: 460px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* ========== DESKTOP (≥992px) ========== */
+@media (min-width: 992px) {
+  .app-root,
+  .login-root {
+    padding: 3rem;
+  }
+
+  .app-shell {
+    max-width: 1200px;
+  }
+
+  .app-main {
+    padding: 2.5rem;
   }
 }
 
-.card {
-  padding: 2em;
+/* ========== LARGE SCREENS (≥1400px) ========== */
+@media (min-width: 1400px) {
+  .app-shell {
+    max-width: 1300px;
+  }
 }
 
-.read-the-docs {
-  color: #888;
+/* ========== SHARED UTILITIES ========== */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg-custom {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Form input focus states */
+.form-control:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 0.2rem rgba(29, 78, 216, 0.25);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  transform: translateY(-1px);
 }
